@@ -25,11 +25,13 @@ void second(long long int lim)
             if(sieve[j]) sieve[j] = 0;
         }
     }
-    long long int b;
-    while(scanf("%lld", &b) && b != -1) printf("%lld\n", sieve[b]);
+    for(long long int i = 2; i <= lim; i++)
+    {
+        if(sieve[i])printf("%lld\n", i);
+    }
 }
 int main() 
 {
-    second(100000);
+    second(100);
 	return 0;
 }
