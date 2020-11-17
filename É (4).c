@@ -91,8 +91,95 @@ int fourth(int k, int f, int isMDC)
     }
     return (isMDC) ? mdc : mmc;
 }
+int fifth(int a, int b)
+{
+    while(b != 0)
+    {
+        int temp = b;
+        b = a % b;
+        a = temp;
+    }
+    return a;
+}
+int sixth(int a, int b)
+{
+    if(a < b) 
+    {
+        int temp = a;
+        a = b;
+        b = temp;
+    }
+
+    if(a == 0 && b != 0)
+    {
+        printf("1*%d - 1*%d\n", b, a);
+    }
+    else if(a != 0 && b == 0)
+    {
+       printf("1*%d - 1*%d\n", a, b); 
+    }
+    else if(a == 0 && b == 0)
+    {
+        printf("1*0 - 1*0\n"); 
+    }
+    else if(a == b)
+    {
+        printf("1*%d - 0*%d\n", a, a);
+    }
+    else 
+    {
+        int q1 = a, q2 = b;
+        int q[100], n = 0;
+        while(q2 != 0 && q1 % q2 != 0)
+        {
+            q[n++] = q1/q2;
+            int temp = q1;
+            q1 = q2;
+            q2 = temp % q2;
+        }
+    
+        if(n == 1)
+        {
+            printf("1*%d - %d*%d\n", a, q[n - 1], b);
+        }
+        else
+        {
+        
+            int m1, m2, in, s, t;
+            m1 = q[--n];
+            
+            in = 1;
+            s = m1;
+            for(int i = n - 1; i>= 0; i--)
+            {
+                if(i == 0) s = m1;
+                int temp = m1;
+                m1 = q[i]*m1 + in;
+                in = temp;
+            }
+            t = m1;
+           if((n + 1) % 2 == 0)
+           {
+                if(t == s)
+                {
+                    printf("1*%d - 0*%d\n", b, a); 
+                }
+                else printf("%d*%d - %d*%d\n", t, b, s, a);
+           }
+           else
+           {
+                if(t == s)
+                {
+                    printf("1*%d - 0*%d\n", a, b); 
+                }
+                else printf("%d*%d - %d*%d\n", s, a, t, b);
+               
+           }
+        }
+    }
+}
 int main() 
 {
-    second(10000);
+    sixth(123, 23);
 	return 0;
 }
