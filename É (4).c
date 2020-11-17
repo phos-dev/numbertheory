@@ -14,11 +14,10 @@ int first(int a){
 }
 void create_sieve(long long int* sieve, long long int lim)
 {
-    memset(sieve, 1, sizeof(sieve));
+    for(long long  int i = 2; i <= lim; i++) sieve[i] = 1;
     sieve[0] = sieve[1] = 0;
     for(long long  int i = 2; i <= lim; i++)
     {
-        if(sieve[i]) sieve[i] = 1; 
         for(long long  int j = i*i; j <= lim; j += i)
         {
             if(sieve[j]) sieve[j] = 0;
@@ -37,6 +36,7 @@ void second(long long int lim)
 void third(long long int n)
 {
     long long int primes[n + 1], i;
+    memset(primes, 1, sizeof(primes));
     create_sieve(primes, n + 1);
     i = 2;
     while(n != 1)
@@ -54,8 +54,45 @@ void third(long long int n)
         else i++;
     }
 }
+int fourth(int k, int f, int isMDC)
+{
+    int a = k, b = f;
+    int n = (k > f) ? (k + 1) : (f + 1);
+    long long int primes[n + 1], i = 2;
+    create_sieve(primes, n + 1);
+    int mdc, mmc;
+    mdc = mmc = 1;
+    while(i <= n)
+    {
+        if(a == 1 && a == b) break;
+        else
+        {
+            
+            if(primes[i])
+            {
+                
+                int d = 0;
+                if(a % i == 0)
+                {
+                    a /= i;
+                    d++;
+                }
+                if(b % i == 0)
+                {
+                    b /= i;
+                    d++;
+                }
+                if(d && !isMDC) mmc *= i;
+                if(d == 2 && isMDC) mdc *= i++;
+                if(d == 0) i++;
+            }
+            else i++;
+        }
+    }
+    return (isMDC) ? mdc : mmc;
+}
 int main() 
 {
-    third(324);
+    second(10000);
 	return 0;
 }
