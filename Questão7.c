@@ -2,7 +2,7 @@
 #include <string.h>
 #include <math.h>
 #include <stdlib.h>
-
+// PROGRAMA PRA CALCULAR O INVERSO MODULAR :D
 int main() {
     int a, m, b;
     scanf("%d%d", &a, &m);
